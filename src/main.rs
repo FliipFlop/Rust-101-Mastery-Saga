@@ -1,13 +1,14 @@
 fn main() {
-    condition_1();
+    // condition_1();
+    // println!("=====================");
+    // condition_2();
+    // println!("=====================");
+    // loop_1();
+    // println!("=====================");
+    // test_borrow();
+    // println!("=====================");
+    lifetime_example();
     println!("=====================");
-    condition_2();
-    println!("=====================");
-    loop_1();
-    println!("=====================");
-    test_borrow();
-    println!("=====================");
-
 }
 
 fn condition_1(){
@@ -71,4 +72,20 @@ fn test_borrow(){
     friend3.push_str(" and silver coin");
     println!("Friend3 has: {}", friend3);
 
+}
+
+fn lifetime_example(){
+    let map1: &str = "map1 map1";
+    let map2: &str = "map2 map2 map2";
+
+    let longest = longest_map(map1, map2);
+    println!("The longest map is: {}", longest);
+}
+
+fn longest_map<'a>(map1: &'a str, map2: &'a str) -> &'a str {
+    if map1.len() > map2.len() {
+        map1
+    } else {
+        map2
+    }
 }
