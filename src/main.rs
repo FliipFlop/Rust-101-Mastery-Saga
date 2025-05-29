@@ -1,13 +1,48 @@
+struct Crabby {
+    name: String,
+    health: u8,
+}
+
+impl Crabby {    
+    fn print_hp(&self) {
+        println!("{} HP: {}", self.name , self.health);
+    }
+
+    fn healing(&mut self, hp: u8){
+        if self.health + hp > 100 {
+            self.health = 100;
+        } else {
+            self.health += hp;
+        }            
+        println!("{} healed for {} HP", self.name, hp);
+        self.print_hp();
+    }
+    
+    fn take_damage(&mut self, damage: u8){
+        if self.health > damage {
+            self.health -= damage;
+            println!("{} took {} damage", self.name, damage);
+        } else {
+            self.health = 0;
+            println!("{} has been defeated", self.name);
+        }
+
+        self.print_hp();
+    }
+}
+
 fn main() {
-    // condition_1();
-    // println!("=====================");
-    // condition_2();
-    // println!("=====================");
-    // loop_1();
-    // println!("=====================");
-    // test_borrow();
-    // println!("=====================");
+    condition_1();
+    println!("=====================");
+    condition_2();
+    println!("=====================");
+    loop_1();
+    println!("=====================");
+    test_borrow();
+    println!("=====================");
     lifetime_example();
+    println!("=====================");
+    test_crabby();
     println!("=====================");
 }
 
@@ -89,3 +124,34 @@ fn longest_map<'a>(map1: &'a str, map2: &'a str) -> &'a str {
         map2
     }
 }
+
+
+fn test_crabby(){
+    let mut crabby = Crabby {
+        name: String::from("Crabby"),
+        health: 70,
+    };
+
+    crabby.healing(20);
+    crabby.healing(30);
+    crabby.take_damage(30);
+    crabby.take_damage(2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
